@@ -3,6 +3,7 @@ services:
   localdb:
     build: docker/postgres
     image: localdb
+    env_file: docker.env
     ports:
       - 5433:5432
     volumes:
