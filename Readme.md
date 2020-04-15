@@ -17,7 +17,7 @@ We start the workers in order to get it to run the setup.py script.
 
 ```
 export UID
-docker-compose build
+docker-compose build --build-arg UID=${UID} # NOTE: propagating UID parameter
 docker-compose up workers
 ```
 
