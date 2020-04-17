@@ -29,7 +29,7 @@ docker-compose up workers
 
 Next run the update script to create the fact API tables. Assuming the
 localdb docker container is running and you have psql installed on your
-host machine, you can use:
+host machine (e.g. you can use [instructions from here to install](https://linuxize.com/post/how-to-install-postgresql-on-ubuntu-18-04/), you can run:
 
 ```
 psql -U postgres -h localhost -p 5433 idetect < source/data/update.sql
