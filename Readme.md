@@ -13,6 +13,12 @@ into the containers, which would be an option in production. Having to
 re`build` the images every time during development would be a real drag,
 though.
 
+To start localdb container in detached mode:
+
+```bash
+docker-compose up -d localdb
+```
+
 We start the workers in order to get it to run the setup.py script.
 
 ```
