@@ -75,3 +75,44 @@ inside the docker container at `/var/log/workers`
 ```
 docker logs idetect_notebooks_1
 ```
+
+
+## checking idetect user with python
+```bash
+$ sudo apt-get install python-pip
+$ sudo apt-get install python-psycopg2
+$ sudo apt-get install libpq-dev
+$ pip3 install psycopg2
+$ python3
+>>>import psycopg2
+>>>psycopg2.connect("dbname=idetect user=idetect host=localhost password=democracy port=5432")
+```
+
+The following result indicates user is not created:
+```
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/alexbu/.local/lib/python3.5/site-packages/psycopg2/__init__.py", line 127, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: FATAL:  password authentication failed for user "idetect"
+FATAL:  password authentication failed for user "idetect"
+```
+
+The following result indicates the user is created
+```
+<connection object at 0x7f712de258d0; dsn: 'host=localhost user=idetect password=xxx dbname=idetect port=5432', closed: 0>
+```
+
+## manually creating required databases
+```bash
+$ sudo -u postgres psql
+postgres=# CREATE USER idetect WITH PASSWORD 'democracy';
+postgres=# CREATE DATABASE idetect;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE idetect TO idetect;
+postgres=# CREATE USER tester WITH PASSWORD 'tester';
+postgres=# CREATE DATABASE idetect_test;
+postgres=# GRANT ALL PRIVILEGES ON DATABASE idetect_test to tester;
+postgres=# \q
+```
+
+
